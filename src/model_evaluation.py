@@ -119,13 +119,14 @@ def save_metrics(metrics: dict, file_path: str) -> None:
 def main():
     try:
         # params = load_params(params_path='params.yaml')
-        clf = load_model('./models/model.pkl')
+        clf = load_model(r"C:\Pipeline_experimenting_tracking\models\model.pkl")
         test_data = load_data('./data/processed/test_tfidf.csv')
 
         X_test = test_data.iloc[:, :-1].values
         y_test = test_data.iloc[:, -1].values
-
         metrics = evaluate_model(clf, X_test, y_test)
+        print("Evaluation metrics:",metrics)
+        save_metrics(metrics,'reports/metrics.json')
     except Exception as e:
         logger.error("Error occured while saving the metrics: %s",e)
         print(f"Error:{e}")
